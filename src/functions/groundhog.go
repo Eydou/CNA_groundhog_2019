@@ -50,20 +50,22 @@ func (st *algo) CalcEvolution(index int) {
 	currentsign := bool(true)
 
 	res = st.tabEvo[index] - st.tabEvo[0]
-	res = res / st.tabEvo[0] * 100
+	res = res / math.Sqrt(math.Pow(st.tabEvo[0], 2)) * 100
 	fmt.Printf("\tr=%.0f%%", res)
 	st.CalcDevation(index)
-	if res > 0 {
-		currentsign = true
+	if math.Inf(+1) != res && math.Inf(-1) != res {
+		if res > 0 {
+			currentsign = true
+		}
+		if res < 0 {
+			currentsign = false
+		}
+		if math.Inf(+1) != res && math.Inf(-1) != res && st.lastsign != currentsign {
+			fmt.Printf("\ta switch occurs")
+			st.switchTime++
+		}
+		st.lastsign = currentsign
 	}
-	if res < 0 {
-		currentsign = false
-	}
-	if math.Inf(+1) != res && math.Inf(-1) != res && st.lastsign != currentsign {
-		fmt.Printf("\ta switch occurs")
-		st.switchTime++
-	}
-	st.lastsign = currentsign
 }
 
 func (st *algo) CalcTempInc(index int) {
