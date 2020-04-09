@@ -21,7 +21,7 @@ type algo struct {
 	tabEvo     []float64
 	weirdVal   []float64
 	nb         int
-	latestRes  float64
+	lastsign  bool
 	switchTime int
 }
 
@@ -47,17 +47,23 @@ func (st *algo) CalcDevation(index int) {
 
 func (st *algo) CalcEvolution(index int) {
 	res := float64(0)
+	currentsign := bool(true)
 
 	res = st.tabEvo[index] - st.tabEvo[0]
 	res = res / st.tabEvo[0] * 100
 	fmt.Printf("\tr=%.0f%%", res)
 	st.CalcDevation(index)
-	if st.latestRes != 0 && (st.latestRes >= 0 && res < 0) ||
-		(st.latestRes < 0 && res >= 0) {
-		st.switchTime++
-		fmt.Printf("\ta switch occurs")
+	if res > 0 {
+		currentsign = true
 	}
-	st.latestRes = res
+	if res < 0 {
+		currentsign = false
+	}
+	if math.Inf(+1) != res && math.Inf(-1) != res && st.lastsign != currentsign {
+		fmt.Printf("\ta switch occurs")
+		st.switchTime++
+	}
+	st.lastsign = currentsign
 }
 
 func (st *algo) CalcTempInc(index int) {
@@ -104,7 +110,7 @@ func (st *algo) Calcul(index int, number float64, verif bool) {
 
 //GroundHog read input
 func GroundHog(index int) {
-	st := algo{nb: 1, latestRes: 0, switchTime: 0}
+	st := algo{nb: 1, lastsign: true, switchTime: 0}
 	reader := bufio.NewReader(os.Stdin)
 
 	for {
