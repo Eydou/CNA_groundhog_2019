@@ -19,10 +19,44 @@ import (
 type algo struct {
 	tab        []float64
 	tabEvo     []float64
-	weirdVal   []float64
+	tabWeird   []float64
 	nb         int
-	lastsign  bool
+	increment  int
+	lastsign   bool
 	switchTime int
+}
+
+func (st *algo) GetWeirdestValue(index int) {
+	weirdVal := make([]float64, 1)
+	first := 0
+
+	for third := 2; third != st.increment-1; third++ {
+		predict := (st.tabWeird[first] + st.tabWeird[third]) / 2.
+		weirdVal = append(weirdVal, math.Abs(predict-st.tabWeird[third-1.]))
+		first++
+	}
+	st.tabWeird = append(st.tabWeird[:st.increment-1], st.tabWeird[st.increment-1+1:]...)
+	st.tabWeird = append(st.tabWeird[:st.increment-2], st.tabWeird[st.increment-2+1:]...)
+	for i := len(weirdVal); i > 0; i-- {
+		for j := 1; j < i; j++ {
+			if weirdVal[j-1] < weirdVal[j] {
+				intermediate := st.tabWeird[j]
+				intermediate2 := weirdVal[j]
+				st.tabWeird[j] = st.tabWeird[j-1]
+				weirdVal[j] = weirdVal[j-1]
+				st.tabWeird[j-1] = intermediate
+				weirdVal[j-1] = intermediate2
+			}
+		}
+	}
+	fmt.Printf("[")
+	if len(st.tabWeird) > 0 {
+		fmt.Printf("%.1f", st.tabWeird[0])
+		for i := 1; i != len(st.tabWeird) && i != 5; i++ {
+			fmt.Printf(", %.1f", st.tabWeird[i])
+		}
+	}
+	fmt.Printf("]\n")
 }
 
 func (st *algo) CalcDevation(index int) {
@@ -85,12 +119,15 @@ func (st *algo) CalcTempInc(index int) {
 func (st *algo) CreateTab(number float64, index int) {
 	st.tab = append(st.tab, number)
 	st.tabEvo = append(st.tabEvo, number)
+	st.tabWeird = append(st.tabWeird, number)
+
 	if st.nb > index {
 		st.tab = append(st.tab[:0], st.tab[1:]...)
 	}
 	if st.nb > index+1 {
 		st.tabEvo = append(st.tabEvo[:0], st.tabEvo[1:]...)
 	}
+	st.increment++
 }
 
 func (st *algo) Calcul(index int, number float64, verif bool) {
@@ -112,8 +149,9 @@ func (st *algo) Calcul(index int, number float64, verif bool) {
 
 //GroundHog read input
 func GroundHog(index int) {
-	st := algo{nb: 1, lastsign: true, switchTime: 0}
+	st := algo{nb: 1, lastsign: true, switchTime: 0, increment: 0}
 	reader := bufio.NewReader(os.Stdin)
+	res := 0
 
 	for {
 		var verif bool
@@ -124,7 +162,19 @@ func GroundHog(index int) {
 		str = strings.Replace(str, "\n", "", -1)
 		if strings.Compare("STOP", str) == 0 {
 			fmt.Printf("Global tendency switched %d times\n", st.switchTime)
-			fmt.Printf("%d weirdest values are ", st.switchTime)
+			if len(st.tabWeird) > 4 {
+				res = 5
+			} else if len(st.tabWeird) <= 0 {
+				res = len(st.tabWeird) - 2
+			} else {
+				res = 0
+			}
+			fmt.Printf("%d weirdest values are ", res)
+			if len(st.tabWeird) > 1 {
+				st.GetWeirdestValue(index)
+			} else {
+				fmt.Printf("[]\n")
+			}
 			break
 		}
 		number, err := strconv.ParseFloat(str, 64)

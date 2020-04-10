@@ -39,7 +39,7 @@ func main() {
 			fmt.Println(err, number1)
 			os.Exit(84)
 		}
-		if number1 == 0 {
+		if number1 < 2 {
 			os.Exit(84)
 		}
 		functions.GroundHog(number1)
