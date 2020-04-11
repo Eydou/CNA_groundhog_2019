@@ -20,7 +20,10 @@ CPP_FLAGS	=	-W -Wall -Werror -Wextra -std=c++11
 all:	$(NAME)
 
 tests_run:	$(TEST)
-	bats tests/unit_test.bats
+	@make re &>/dev/null 
+	@echo -e "\e[94m-------UNIT_TEST-------\033[0m"
+	@bats tests/unit_test.bats
+	@echo -e "\e[94m-----------------------\033[0m"
 
 $(NAME):	$(OBJ)
 	@$(CC) -o $(NAME) $(OBJ)

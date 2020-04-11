@@ -46,13 +46,14 @@ func (st *algo) GetWeirdestValue(index int) {
 	weirdVal := make([]float64, 1)
 	first := 0
 
-	for third := 2; third != st.increment-1; third++ {
+	for third := 2; third != st.increment; third++ {
 		predict := (st.tabWeird[first] + st.tabWeird[third]) / 2.
 		weirdVal = append(weirdVal, math.Abs(predict-st.tabWeird[third-1.]))
 		first++
 	}
 	st.tabWeird = append(st.tabWeird[:st.increment-1], st.tabWeird[st.increment-1+1:]...)
-	st.tabWeird = append(st.tabWeird[:st.increment-2], st.tabWeird[st.increment-2+1:]...)
+	st.tabWeird = append(st.tabWeird[:0], st.tabWeird[0+1:]...)
+	weirdVal = append(weirdVal[:0], weirdVal[0+1:]...)
 	weirdVal = st.SortDescending(weirdVal)
 	fmt.Printf("[")
 	if len(st.tabWeird) > 0 {
@@ -167,18 +168,18 @@ func GroundHog(index int) {
 		str = strings.Replace(str, "\n", "", -1)
 		if strings.Compare("STOP", str) == 0 {
 			fmt.Printf("Global tendency switched %d times\n", st.switchTime)
-			if len(st.tabWeird) > 4 {
+			if len(st.tabWeird)-2 > 4 {
 				res = 5
-			} else if len(st.tabWeird) >= 3 {
+			} else if len(st.tabWeird)-2 > 0 {
 				res = len(st.tabWeird) - 2
 			} else {
 				res = 0
 			}
-			fmt.Printf("%d weirdest values are ", res)
-			if len(st.tabWeird) > 1 {
+			if len(st.tabWeird) > 2 {
+				fmt.Printf("%d weirdest values are ", res)
 				st.GetWeirdestValue(index)
 			} else {
-				fmt.Printf("[]\n")
+				fmt.Printf("no weirdest value\n")
 			}
 			break
 		}
