@@ -20,8 +20,7 @@ CPP_FLAGS	=	-W -Wall -Werror -Wextra -std=c++11
 all:	$(NAME)
 
 tests_run:	$(TEST)
-	$(CC) -o unit_tests $(TEST) -lcriterion --coverage
-	./unit_tests | gcovr
+	bats tests/unit_test.bats
 
 $(NAME):	$(OBJ)
 	@$(CC) -o $(NAME) $(OBJ)

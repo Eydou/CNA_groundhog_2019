@@ -169,7 +169,7 @@ func GroundHog(index int) {
 			fmt.Printf("Global tendency switched %d times\n", st.switchTime)
 			if len(st.tabWeird) > 4 {
 				res = 5
-			} else if len(st.tabWeird) <= 0 {
+			} else if len(st.tabWeird) >= 3 {
 				res = len(st.tabWeird) - 2
 			} else {
 				res = 0
