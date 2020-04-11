@@ -26,17 +26,7 @@ type algo struct {
 	switchTime int
 }
 
-func (st *algo) GetWeirdestValue(index int) {
-	weirdVal := make([]float64, 1)
-	first := 0
-
-	for third := 2; third != st.increment-1; third++ {
-		predict := (st.tabWeird[first] + st.tabWeird[third]) / 2.
-		weirdVal = append(weirdVal, math.Abs(predict-st.tabWeird[third-1.]))
-		first++
-	}
-	st.tabWeird = append(st.tabWeird[:st.increment-1], st.tabWeird[st.increment-1+1:]...)
-	st.tabWeird = append(st.tabWeird[:st.increment-2], st.tabWeird[st.increment-2+1:]...)
+func (st *algo) SortDescending(weirdVal []float64) []float64 {
 	for i := len(weirdVal); i > 0; i-- {
 		for j := 1; j < i; j++ {
 			if weirdVal[j-1] < weirdVal[j] {
@@ -49,6 +39,21 @@ func (st *algo) GetWeirdestValue(index int) {
 			}
 		}
 	}
+	return weirdVal
+}
+
+func (st *algo) GetWeirdestValue(index int) {
+	weirdVal := make([]float64, 1)
+	first := 0
+
+	for third := 2; third != st.increment-1; third++ {
+		predict := (st.tabWeird[first] + st.tabWeird[third]) / 2.
+		weirdVal = append(weirdVal, math.Abs(predict-st.tabWeird[third-1.]))
+		first++
+	}
+	st.tabWeird = append(st.tabWeird[:st.increment-1], st.tabWeird[st.increment-1+1:]...)
+	st.tabWeird = append(st.tabWeird[:st.increment-2], st.tabWeird[st.increment-2+1:]...)
+	weirdVal = st.SortDescending(weirdVal)
 	fmt.Printf("[")
 	if len(st.tabWeird) > 0 {
 		fmt.Printf("%.1f", st.tabWeird[0])
