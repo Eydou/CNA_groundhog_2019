@@ -9,6 +9,13 @@ or any other extreme climatic condition whatsoever) as soon as possible.
 
 100% completed
 
+## Bonus
+
+./graphic [-h] [[-g or -a] file period]
+
+![Option general print](link-to-image)
+![Option analyst print](link-to-image)
+
 ## Authors
 
  **[Edouard Touch](https://github.com/Eydou)** - **[Alexis Lopes](https://github.com/LopesAlexis)**
