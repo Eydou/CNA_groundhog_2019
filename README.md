@@ -13,8 +13,8 @@ or any other extreme climatic condition whatsoever) as soon as possible.
 
 ./graphic [-h] [[-g or -a] file period]
 
-![Option general print](link-to-image)
-![Option analyst print](link-to-image)
+![Option general print](https://github.com/Eydou/groundhog/blob/master/bonus/ground1.png)
+![Option analyst print](https://github.com/Eydou/groundhog/blob/master/bonus/ground2.png)
 
 ## Authors
 
