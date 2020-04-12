@@ -13,8 +13,8 @@ Make test_run
 
 ./graphic [-h] [[-g or -a] file period]
 
-![Option general print](https://github.com/Eydou/groundhog/blob/master/bonus/ground1.png)
-![Option analyst print](https://github.com/Eydou/groundhog/blob/master/bonus/ground2.png)
+<center>![Option general print](https://github.com/Eydou/groundhog/blob/master/bonus/ground1.png)<center>
+<center>![Option analyst print](https://github.com/Eydou/groundhog/blob/master/bonus/ground2.png)<center>
 
 ## Authors
 
