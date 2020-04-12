@@ -42,6 +42,24 @@ func (st *algo) SortDescending(weirdVal []float64) []float64 {
 	return weirdVal
 }
 
+func (st *algo) PrintWeirdestValue(index int) {
+	res := 0
+
+	if len(st.tabWeird)-2 > 4 {
+		res = 5
+	} else if len(st.tabWeird)-2 > 0 {
+		res = len(st.tabWeird) - 2
+	} else {
+		res = 0
+	}
+	if len(st.tabWeird) > 2 {
+		fmt.Printf("%d weirdest values are ", res)
+		st.GetWeirdestValue(index)
+	} else {
+		fmt.Printf("no weirdest value\n")
+	}
+}
+
 func (st *algo) GetWeirdestValue(index int) {
 	weirdVal := make([]float64, 1)
 	first := 0
@@ -90,7 +108,7 @@ func (st *algo) CalcEvolution(index int) {
 	currentsign := bool(true)
 
 	res = st.tabEvo[index] - st.tabEvo[0]
-	res = res / math.Sqrt(math.Pow(st.tabEvo[0], 2)) * 100
+	res = res / math.Abs(st.tabEvo[0]) * 100
 	fmt.Printf("\tr=%.0f%%", res)
 	st.CalcDevation(index)
 	if math.Inf(+1) != res && math.Inf(-1) != res {
@@ -157,7 +175,6 @@ func (st *algo) Calcul(index int, number float64, verif bool) {
 func GroundHog(index int) {
 	st := algo{nb: 1, lastsign: true, switchTime: 0, increment: 0}
 	reader := bufio.NewReader(os.Stdin)
-	res := 0
 
 	for {
 		var verif bool
@@ -167,20 +184,11 @@ func GroundHog(index int) {
 		}
 		str = strings.Replace(str, "\n", "", -1)
 		if strings.Compare("STOP", str) == 0 {
+			if st.nb <= index {
+				os.Exit(84)
+			}
 			fmt.Printf("Global tendency switched %d times\n", st.switchTime)
-			if len(st.tabWeird)-2 > 4 {
-				res = 5
-			} else if len(st.tabWeird)-2 > 0 {
-				res = len(st.tabWeird) - 2
-			} else {
-				res = 0
-			}
-			if len(st.tabWeird) > 2 {
-				fmt.Printf("%d weirdest values are ", res)
-				st.GetWeirdestValue(index)
-			} else {
-				fmt.Printf("no weirdest value\n")
-			}
+			st.PrintWeirdestValue(index)
 			break
 		}
 		number, err := strconv.ParseFloat(str, 64)
