@@ -2,7 +2,7 @@
 // EPITECH PROJECT, 2020
 // CNA_groundhog_2019
 // File description:
-// groundhog
+// groundhog by edouard touch and alexis lopes
 //
 
 package functions
