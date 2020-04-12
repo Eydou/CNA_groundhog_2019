@@ -12,7 +12,7 @@
 
 @test "test STOP 0 number" {
     run bash -c "echo STOP | ./groundhog 3"
-    [ "$status" -eq 0 ]
+    [ "$status" -eq 84 ]
 }
 
 @test "test error arg" {
