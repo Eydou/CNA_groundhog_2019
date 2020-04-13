@@ -5,6 +5,10 @@ Your job is to extract some relevant information from the data received in real-
 float representing a temperature), in order to detect weather aberrations (droughts, severe colds, hurricanes
 or any other extreme climatic condition whatsoever) as soon as possible.
 
+## Test
+
+Test moulinette: 100 %
+
 ## Unit Test
 
 Make test_run
