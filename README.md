@@ -11,11 +11,11 @@ Test moulinette: 100 %
 
 ## Unit Test
 
-Make test_run
+    make test run
 
 ## Bonus
 
-./graphic [-h] [[-g or -a] file period]
+    ./graphic [-h] [[-g or -a] file period]
 
 <p align="center">
   <img width="460" height="300" src="https://github.com/Eydou/groundhog/blob/master/bonus/ground1.png">
@@ -23,6 +23,7 @@ Make test_run
 <p align="center">
   <img width="460" height="300" src="https://github.com/Eydou/groundhog/blob/master/bonus/ground2.png">
 </p>
+
 
 
 ## Authors
