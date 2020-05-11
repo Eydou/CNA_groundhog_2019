@@ -9,7 +9,7 @@ or any other extreme climatic condition whatsoever) as soon as possible.
 
 | Project | Moulinette |
 | --- | --- |
-| 207demography | 100% |
+| groundhog | 100% |
 
 ## Unit Test
 
