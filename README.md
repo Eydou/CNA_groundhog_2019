@@ -7,7 +7,7 @@ or any other extreme climatic condition whatsoever) as soon as possible.
 
 ## Test
 
-| groundhog | Moulinette |
+| Groundhog | Moulinette |
 | --- | --- |
 | rgs | 100% |
 | final switches | 100% |
