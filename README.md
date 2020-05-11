@@ -10,11 +10,8 @@ or any other extreme climatic condition whatsoever) as soon as possible.
 | Project | Moulinette |
 | --- | --- |
 | groundhog | 100% |
-| --- | --- |
 | rgs | 100% |
-| --- | --- |
 | final switches | 100% |
-| --- | --- |
 | errors | 100% |
 
 ## Unit Test
