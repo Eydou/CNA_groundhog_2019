@@ -7,7 +7,9 @@ or any other extreme climatic condition whatsoever) as soon as possible.
 
 ## Test
 
-Test moulinette: 100 %
+| Project | Moulinette |
+| --- | --- |
+| 207demography | 100% |
 
 ## Unit Test
 
