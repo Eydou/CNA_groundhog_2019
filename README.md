@@ -33,3 +33,10 @@ or any other extreme climatic condition whatsoever) as soon as possible.
 ## Authors
 
  **[Edouard Touch](https://github.com/Eydou)** - **[Alexis Lopes](https://github.com/LopesAlexis)**
+ 
+[6.1]: http://i.imgur.com/0o48UoR.png (Follow me !)
+
+[1]: https://github.com/Eydou
+
+Follow me on [![alt text][6.1]][1]
+
