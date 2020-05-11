@@ -7,9 +7,8 @@ or any other extreme climatic condition whatsoever) as soon as possible.
 
 ## Test
 
-| Project | Moulinette |
+| groundhog | Moulinette |
 | --- | --- |
-| groundhog | 100% |
 | rgs | 100% |
 | final switches | 100% |
 | errors | 100% |
